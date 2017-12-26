@@ -1,0 +1,27 @@
+{% extends 'borders.html' %}
+{% block title %}User{% endblock %}
+{% block content %}
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="home-option">
+                <div class="col-xs-6 text-center">
+                    <div class="card card-outline-primary">
+                        <a href="{% url 'home:user_home_scan' %}" type="submit" class="btn btn-outline-primary">
+                            <i class="fa fa-file" aria-hidden="true"></i>
+                        </a>
+                        <!-- <a href="http://127.0.0.1:8080/home/document_title/" type="submit" class="btn btn-outline-primary"><i class="fa fa-file" aria-hidden="true"></i></a> -->
+                        <p>Scan a Document</p>
+                    </div>
+                </div>
+                <div class="col-xs-6 text-center">
+                    <div class="card card-outline-primary">
+                        <a href="{% url 'home:user_upload_direct' %}" class="btn btn-outline-primary" type="submit"><i class="fa fa-upload" aria-hidden="true"></i></i></a>
+                        <!-- <a href="{% url 'home:login' %}" class="btn btn-outline-primary" type="submit"><i class="fa fa-upload" aria-hidden="true"></i></i></a> -->
+                        <!-- <a href="http://127.0.0.1:8080/home/login/" class="btn btn-outline-primary" type="submit"><i class="fa fa-upload" aria-hidden="true"></i></i></a> -->
+                        <p>Direct Upload (Softcopy)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

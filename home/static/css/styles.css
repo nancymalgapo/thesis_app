@@ -1,0 +1,97 @@
+* {font-family: 'Open Sans', sans-serif;}
+p{color: #000000;}
+.header {
+    background-color: #ac3939;
+    padding-top: 25px;
+    height: 155px;
+}
+.content{height: 113px;}
+.header img {
+    float: right;
+    width: 100px;
+    height: 100px;
+}
+h3, h4 {
+    position: relative; 
+    color: #ffffff !important;
+}
+.btn {
+    transition: all .2s ease-in-out;
+}
+.home {
+    padding-top: 50px;
+    /*padding-bottom: 100px;*/
+}
+.home p{
+    font-size: 25px; 
+    font-weight: 900; 
+    color: #333;
+}
+.home a, .login .btn-outline-primary {
+    color: #909090;
+    background-image: none;
+    background-color: transparent;
+    border: 2px solid;
+    border-color: #ac3939;
+    padding: 10px 50px;
+}
+.home a p {
+    margin: 0 auto;
+}
+.home a:hover, .login a:hover, .home-option .btn-outline-primary:hover, .login .btn-outline-primary:hover {
+    background-color: #ac3939;
+    color: #FFF;
+}
+.login .card-outline-primary, .home-option .card-outline-primary {
+    margin-top: 10px;
+    padding: 25px;
+    border: 2px solid #ac3939;
+    border-radius: 4px;
+}
+.login .form-inline .form-control {
+    width: 200px;
+}
+.fa-file, .fa-upload, .fa-book, .fa-print {font-size: 100px !important;}
+.home-option .btn-outline-primary {
+    color: #909090;
+    background-image: none;
+    background-color: transparent;
+    padding: 10px 50px;
+}
+/*.home-option .card-outline-primary {height: 265px;}*/
+.home-option .card p {
+    text-align: center;
+}
+.plagscan-logo{width:150px;}
+.btn-inst{
+    border: 2px solid !important;
+    border-color: #ac3939 !important;
+}
+footer {
+    height: 60px; 
+    background-color: #ac3939;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+.alert {
+    padding: 20px;
+    background-color: #f44336;
+    color: white;
+}
+
+.closebtn {
+    margin-left: 15px;
+    color: white;
+    font-weight: bold;
+    float: right;
+    font-size: 22px;
+    line-height: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.closebtn:hover {
+    color: black;
+}

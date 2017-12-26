@@ -1,0 +1,59 @@
+{% extends 'borders.html' %}
+{% block title %}Login{% endblock %}
+{% block content %}
+{% load static %}
+    <div class="container">
+        <div class="row">
+            <div class="login">
+                <div class="card card-outline-primary text-center">
+                    <img class="plagscan-logo" src="{% static 'images/plagscan-logo.png' %}">
+                    <!-- plagscan -->
+                    <form action="" method="POST">
+                    <!-- <form action="{% url 'home:user_home' %}" method="POST"> -->
+                        {% csrf_token %}
+                        <!-- {{form}} -->
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="username">Email or Username:</label>
+                                <input type="text" class="form-control"
+                                        name="username" id="username" required>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="pwd">Password:</label>
+                                <input type="password" class="form-control" 
+                                        name="pwd" id="pwd" required>
+                            </div>
+                        </div>
+                        <!-- <div class="col-sm-12">
+                            <div class="form-group">
+                                <label for="domain">Enter Domain Name:</label>
+                                <input type="text" value="" class="form-control" id="domain" required>
+                            </div>
+                        </div> -->
+                        <button type="submit" class="btn btn-outline-primary" value="plagscan">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% if messages %}
+        {% for message in messages %}
+            <div id="myModal" class="modal fade">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <center>{{ message }}</center>
+                        </div>
+                    </div>
+                </div> 
+            </div>
+        {% endfor %}
+    {% endif %}
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $("#myModal").modal('show');
+        });
+    </script>
+{% endblock %}

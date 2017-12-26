@@ -1,0 +1,42 @@
+{% extends 'borders.html' %}
+{% block title %}Upload{% endblock %}
+{% block content %}
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="home-option">
+                <div class="col-xs-12">
+                    <div class="card card-outline-primary">
+                        <p><b>Upload your files in pdf form!</b></p>
+                        <form method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            {{ form.as_p }}
+                            <center>
+                                <input class="user_upload_direct_input file" type="file" name="myfile"><br>
+                                <button type="submit" class="btn btn-outline-primary btn-inst"><p>Submit</p></button>
+                            </center>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    {% if messages %}
+        {% for message in messages %}
+            <div id="myModal" class="modal fade">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <center>{{ message }}</center>
+                        </div>
+                    </div>
+                </div> 
+            </div>
+        {% endfor %}
+    {% endif %}
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $("#myModal").modal('show');
+        });
+    </script>
+{% endblock %}

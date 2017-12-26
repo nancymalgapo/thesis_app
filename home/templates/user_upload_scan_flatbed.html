@@ -1,0 +1,54 @@
+{% extends 'borders.html' %}
+{% block title %}Upload from flatbed{% endblock %}
+{% block content %}
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="home-option">
+                <div class="col-xs-12">
+                    <div class="card card-outline-primary">
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <p>Click 'Scan' to capture image.</p>
+                                <form action="" method="POST">
+                                {% csrf_token %}
+                                    <center>
+                                        <button type="submit" name="scan" class="btn btn-outline-primary btn-inst"><p>Scan</p></button>
+                                    </center>
+                                </form>
+                            </div>
+                            <div class="col-xs-6">
+                                <p>Click 'Upload' when finished scanning.</p>
+                                <form action="" method="POST">
+                                {% csrf_token %}
+                                    <center>
+                                        <button type="submit" name="submit" class="btn btn-outline-primary btn-inst"><p>Upload</p></button>
+                                    </center>
+                                </form>        
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    
+    {% if messages %}
+        {% for message in messages %}
+            <div id="myModal" class="modal fade">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <center>{{ message }}</center>
+                        </div>
+                    </div>
+                </div> 
+            </div>
+        {% endfor %}
+    {% endif %}
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $("#myModal").modal('show');
+        });
+    </script>
+{% endblock %}

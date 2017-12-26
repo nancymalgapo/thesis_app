@@ -1,0 +1,42 @@
+{% extends 'borders.html' %}
+{% block title %}Feeder Procedure{% endblock %}
+{% block content %}
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="home-option">
+                <div class="col-xs-12">
+                    <div class="card card-outline-primary">
+                        <p>Instructions:</p>
+                        <ol type="1">
+                            <li>Insert the document on the paper feeder properly in landscape orientation.</li>
+                            <li>Make sure that the pages are facing down.</li>
+                            <li>Click 'Next' to start scanning.</li>
+                        </ol>
+                        <center>
+                            <a href="{% url 'home:user_upload_scan_feeder' %}" type="submit" class="btn btn-outline-primary btn-inst"><p>Next</p></a>
+                        </center>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    {% if messages %}
+        {% for message in messages %}
+            <div id="myModal" class="modal fade">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <center>{{ message }}</center>
+                        </div>
+                    </div>
+                </div> 
+            </div>
+        {% endfor %}
+    {% endif %}
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $("#myModal").modal('show');
+        });
+    </script>
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends 'borders.html' %}
+    {% block title %}Error{% endblock %}
+    {% block content %}
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <div class="home">
+                        <h1 style="font-weight: 900;">Page not found!</h1><br>
+                        <a href="{% url 'home:index' %}" type="submit" class="btn btn-outline-primary btn-inst"><p>Return to home</p></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endblock %}
