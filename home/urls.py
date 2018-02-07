@@ -16,4 +16,8 @@ urlpatterns =[
     url(r'^scan_upload_flatbed/$', views.user_upload_scan_flatbed, name='user_upload_scan_flatbed'),
     url(r'^result/$', views.doc_result, name='doc_result'),
     url(r'^error_page/$', views.error_page, name='error_page'),
+    
+    url(r'^doc_list/$', views.document_list, name='doc_list'),
+    url(r'^document/$', views.document, name='document'),
+    url(r'^document_check/$', views.document_check, name='document_check'),
 ]

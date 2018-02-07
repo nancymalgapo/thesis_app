@@ -1,0 +1,8 @@
+{% extends 'borders.html' %}
+{% block title %}Result{% endblock %}
+{% block content %}
+{% for document in documents %}
+    
+    <a href="/home/document?id={{document.docID}}"><p>{{ document.document }}</p></a>
+{% endfor %}
+{% endblock %}

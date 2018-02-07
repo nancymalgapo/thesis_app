@@ -1,0 +1,9 @@
+{% extends 'borders.html' %}
+{% block title %}Result{% endblock %}
+{% block content %}
+<p> title: {{ document.document }}</p>
+</p> this document is done </p>
+<p> Reportlink = <a href="{{ report.reportLink}}"> {{ report.reportLink}}</a> </p>
+<p> Downloadlink = <a href="{{ report.reportLink}}"> {{ report.downloadLink}}</a></p>
+<p> Indoclink = <a href="{{ report.reportLink}}">{{ report.indocLink}} </a> </p>
+{% endblock %}

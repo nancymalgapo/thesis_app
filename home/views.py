@@ -1,27 +1,31 @@
 from __future__ import unicode_literals
 
 from django.conf import settings
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib import messages
 from os.path import dirname, exists, isdir, realpath, isfile, join
 
 import glob
 import pdb
-from .hcr import HCR
+#from .hcr import HCR
 import os
 
 from .plagscan import login_user, plagscan_upload
-from .forms import DocumentForm
-from .picam import capture_images
-from .ocr import read_typewritten_img, read_handwritten_from_dir
+#from .forms import DocumentForm
+#from .picam import capture_images
+#from .ocr import read_typewritten_img, read_handwritten_from_dir
 from .utils import SCANNED_FILES_DIR, create_dir, format_list, generate_pdf
 from time import sleep
 
 
 from django.core.files.storage import FileSystemStorage
 
-login_validation = False
+from .Api import PlagScan
+from .models import Document
+from django.core.exceptions import ObjectDoesNotExist
+
+login_validation = True
 doc_type = ""
 doc_title = ""
 doc_pages = 0
@@ -186,7 +190,7 @@ def user_upload_scan_feeder(request):
     global doc_type
     if login_validation:
         if request.method == 'GET':
-            # print('GET')
+            print('GET')
             capture_images(SCANNED_FILES_DIR + doc_title + '/', doc_pages, 'feeder')
             print('Finish Capturing images')
             messages.success(request, 'null')
@@ -236,10 +240,20 @@ def user_upload_scan_feeder(request):
 def user_upload_direct(request):
     if login_validation:
         if request.method == 'GET':
+            with open('media/documents/questions.docx', 'rb') as f: #open the file
+                contents = f.readlines() #put the lines to a variable (list).
+                print (f.readlines())
             return render(request, 'user_upload_direct.html')
         elif request.method == 'POST':
+            plagscan = PlagScan()
+           
+            newdoc = Document(document=request.FILES['myfile'])
+            newdoc.save()
+            docID = plagscan.document_submit(newdoc.document, newdoc)
+            
             print ('Validating form ...')
-            form = DocumentForm(request.POST, request.FILES)
+            #form = DocumentForm(request.POST, request.FILES)
+            '''
 
             fs = FileSystemStorage()
             uploaded_file = request.FILES['myfile']
@@ -258,7 +272,8 @@ def user_upload_direct(request):
                 return render(request, 'user_upload_scan_flatbed.html')
 
             os.system('rm %s ' % (fs.location + '/' + temp_name))
-
+            '''
+            return redirect("/home/document/?id="+str(docID))
             return render(request, 'user_upload_direct.html')
         else:
             print('INVALID FORM')
@@ -268,6 +283,53 @@ def user_upload_direct(request):
         # return render(request, 'user_upload_direct.html', {'form': form})
     else:
         return render(request, 'error_page.html')
+
+def document_list(request):
+    if request.method == 'GET':
+        documents = Document.objects.all()
+        context = {}
+        context['documents'] = documents
+        return render(request, 'document_list.html', context)
+
+def document(request):
+    if request.method == 'GET':
+        doc_id = request.GET.get("id")
+        try:
+            document = Document.objects.get(docID= doc_id) or None
+        except ObjectDoesNotExist:
+            document = None
+        
+        context = {}
+        context['document'] = document
+        if document is None:
+             return HttpResponse("DOCUMENT ID DOES NOT EXIST")
+        plagscan = PlagScan()
+        status = plagscan.document_analyzed_status(doc_id)
+        if status == "not":
+            return render(request, 'document_not.html', context)
+        elif status == "checking":
+            return render(request, 'document_checking.html', context)
+        elif status == "converting":
+            return render(request, 'document_converting.html', context)
+        elif status == "done":
+            context['report'] = plagscan.document_report(doc_id)
+            return render(request, 'document_done.html', context)
+            pass
+
+def document_check(request):
+    if request.method == 'GET':
+        doc_id = request.GET.get("id")
+        try:
+            document = Document.objects.get(docID= doc_id)
+        except ObjectDoesNotExist:
+            document = None
+        context = {}
+        context['document'] = document
+        if document is None:
+             return HttpResponse("DOCUMENT ID DOES NOT EXIST")
+        plagscan = PlagScan()
+        status = plagscan.document_check_plagiarism(doc_id)
+        return HttpResponse(status)
 
 def doc_result(request):
     global login_validation
