@@ -4,5 +4,4 @@ __pycache__
 *.swp
 *.log
 keys.json
-db.sqlite3
 .idea/
