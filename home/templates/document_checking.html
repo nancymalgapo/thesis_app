@@ -1,7 +1,16 @@
 {% extends 'borders.html' %}
 {% block title %}Result{% endblock %}
 {% block content %}
-<p> title: {{ document.document }}</p>
-</p> this document is being analyzed at the moment </p>
-
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="home-option">
+                <div class="col-xs-12">
+                    <div class="card card-outline-primary">
+                        <p>Title: {{ document.document }}</p>
+                        <p>This document is being analyzed at the moment.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}

@@ -1,8 +1,21 @@
 {% extends 'borders.html' %}
 {% block title %}Result{% endblock %}
 {% block content %}
-{% for document in documents %}
-    
-    <a href="/home/document?id={{document.docID}}"><p>{{ document.document }}</p></a>
-{% endfor %}
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="home-option">
+                <div class="col-xs-12">
+                    <div class="list-container">
+                        <center><h2>Document List:</h2></center>
+                        <div class="list-group" style="overflow-y: auto; height: 300px;">
+                            {% for document in documents %}
+                            <a href="/home/document?id={{document.docID}}" class="list-group-item">
+                                    <p>{{ document.document }}</p></a>
+                            {% endfor %}
+                        </div>
+                    </div>  
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}

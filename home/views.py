@@ -302,7 +302,7 @@ def document(request):
         context = {}
         context['document'] = document
         if document is None:
-             return HttpResponse("DOCUMENT ID DOES NOT EXIST")
+             return render(request, 'document_notid.html', context)
         plagscan = PlagScan()
         status = plagscan.document_analyzed_status(doc_id)
         if status == "not":
@@ -326,7 +326,7 @@ def document_check(request):
         context = {}
         context['document'] = document
         if document is None:
-             return HttpResponse("DOCUMENT ID DOES NOT EXIST")
+             return render(request, 'document_notid.html', context)
         plagscan = PlagScan()
         status = plagscan.document_check_plagiarism(doc_id)
         return HttpResponse(status)
